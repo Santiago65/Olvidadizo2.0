@@ -135,7 +135,7 @@ def cumple(request):
     }
     return render(request, 'cumple.html', context)
 
-
+@login_required
 def agregarCumple(request):
     if request.method == 'POST':
         form = CumpleForm(request.POST)
