@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="container py-5">
+    <section class="card card-body">
+        <h1 class="display-1 text-center">Bienvenido a Olvidadizo!!</h1>
+        <br><br>
+        <div class="d-flex justify-content-around h-100">
+            <div class="d-flex flex-column align-items-center">
+                 <i class="fa-solid fa-notebook"></i>
+                <img src="/static/imagenes/notebook.png" height="100" width="100" alt="Foto Notebook">
+                <a href="/tasks/create/" class="btn btn-primary">Crear Tarea</a>
+            </div>
+            <div class="d-flex flex-column align-items-center">
+                <!-- <i class="fa-solid fa-cake-candles"></i> -->
+                <img src="/static/imagenes/pastel.png" height="100" width="100" alt="Foto Pastel">
+                <a href="{% url 'agregarCumple' %}" class="btn btn-primary">Agregar Cumpleaños</a>
+            </div>
+        </div>
+<br>
+<br>
+<br>
+<br>
+{% if user.is_authenticated %}
+<div class="text-center">
+<h4>Bienvenido\a, {{ user.username }}.</h4>
+</div>
+{% else %}
+
+
+   <div class="text-center">
+    <a class="btn btn-primary" href="/signin/">
+        Iniciar sesión
+    </a>
+    <a class="btn btn-primary" href="/signup/">
+        Registrarse
+    </a>
+    {% endif %}
+   </div>
+   <br><br>
+   <div class="container-fluid bg-primary">
+    <footer class="justify-content-between align-items-center">
+        <p class="span12 text-center text-white" id="headerimage">Joaquin - Cesar - Gonzalo - Luca - Santiago</p>
+        <p class="span12 text-center text-white" id="headerimage">@Copyright-2023</p>
+    </footer>
+</div>
+    </section>
+</main>
+{% endblock %}
+

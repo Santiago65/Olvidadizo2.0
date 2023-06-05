@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+<main class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h1 class="text-center display-3 py-5">Administración</h1>
+            <h4 class="mb-4">Usuarios y sus tareas/cumples:</h4>
+
+            {% for user in users %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">{{ user.username }}</h5>
+                    {% if user.tasks.all %}
+                    <h6 class="card-subtitle mb-3">Tareas:</h6>
+                    <ul class="list-group">
+                        {% for task in user.tasks.all %}
+                        <li class="list-group-item">{{ task.title }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    {% if user.cumples.all %}
+                    <h6 class="card-subtitle mt-4">Cumples:</h6>
+                    <ul class="list-group">
+                        {% for cumple in user.cumples.all %}
+                        <li class="list-group-item">
+                            <span class="fw-bold">{{ cumple.fecha }}</span> - {{ cumple.descripcion }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            {% if user.is_authenticated %}
+            <h4 class="text-center py-5">Bienvenido/a, {{ user.username }}.</h4>
+        {% else %}
+            <button type="button" class="btn btn-outline-primary me-2">Iniciar Sesión</button>
+        {% endif %}
+            <h1 class="text-center display-3 py-2">Cumpleaños</h1>
+            
+
+            {% if cumple_list %}
+                <h1 class="mt-5">Listado de Cumpleaños</h1>
+                <ul class="list-group mt-4">
+                    {% for cumple in cumple_list %}
+                        <li class="list-group-item mb-3">
+                            <span class="fw-bold">{{ cumple.fecha }}</span> {{ cumple.descripcion }}
+                            <form action="{% url 'delete_cumple' cumple.id %}" method="POST" class="d-inline" onsubmit="return confirm('¿Estás seguro/a de borrar este cumpleaños?');">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm float-end mt-2 ml-2">Borrar</button>
+                            </form>
+                        </li>
+                        <!-- Mostrar otros datos de cumpleaños aquí -->
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <h1>No hay cumpleaños registrados.</h1>
+            {% endif %}
+        </div>
+    </div>
+</main>
+{% endblock %}
