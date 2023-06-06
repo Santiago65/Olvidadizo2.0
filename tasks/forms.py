@@ -27,7 +27,7 @@ class CumpleForm(forms.ModelForm):
         #help_text='Formato: DD/MM/AAAA'
     )
     descripcion = forms.CharField(
-        widget=forms.TextInput(attrs={'placeholder': 'Cumpleañero', 'class': 'form-control'}),
+        widget=forms.TextInput(attrs={'placeholder': 'Nombre', 'class': 'form-control'}),
         
     )
     def clean_fecha(self):
