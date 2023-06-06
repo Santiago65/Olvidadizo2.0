@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.contrib.auth import authenticate, login, logout
 from .forms import TaskForm, CumpleForm
-from .models import Task, Cumple
+from .models import Task, Cumple, SharedTask
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 
@@ -43,7 +43,6 @@ def signup(request):
 def tasks(request):
     pending_tasks = Task.objects.filter(users=request.user, datecompleted__isnull=True)
     return render(request, 'tasks.html', {'pending_tasks': pending_tasks})
-
 
 @login_required
 def tasks_completed(request):
@@ -173,3 +172,10 @@ def admin_view(request):
         return render(request, 'admin_view.html', {'users': users})
     else:
         return redirect('home')
+    
+@login_required
+def shared_tasks(request):
+    shared_tasks = SharedTask.objects.filter(users=request.user).values_list('task', flat=True)
+    pending_tasks = Task.objects.filter(pk__in=shared_tasks, datecompleted__isnull=True).distinct()
+    return render(request, 'shared_tasks.html', {'pending_tasks': pending_tasks})
+

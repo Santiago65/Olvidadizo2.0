@@ -35,6 +35,7 @@ urlpatterns = [
     path('tasks/cumple/', views.cumple, name='cumple'),
     path('cumple/delete/<int:cumple_id>/', views.delete_cumple, name='delete_cumple'),
     path('admin-view/', views.admin_view, name='admin_view'),
+    path('shared-tasks/', views.shared_tasks, name='shared_tasks'),
 
 ]
 

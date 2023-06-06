@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <h1>Tareas compartidas</h1>
+
+    {% if pending_tasks %}
+      <ul class="list-group">
+        {% for task in pending_tasks %}
+          <li class="list-group-item">{{ task.title }} {{ task.user.username }}</li>
+          <li class="list-group-item"> {{ task.user.username }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No tienes tareas compartidas pendientes.</p>
+    {% endif %}
+  </div>
+{% endblock %}
