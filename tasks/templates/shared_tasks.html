@@ -4,11 +4,13 @@
   <div class="container">
     <h1>Tareas compartidas</h1>
 
-    {% if pending_tasks %}
+    {% if shared_tasks %}
       <ul class="list-group">
-        {% for task in pending_tasks %}
-          <li class="list-group-item">{{ task.title }} {{ task.user.username }}</li>
-          <li class="list-group-item"> {{ task.user.username }}</li>
+        {% for task in shared_tasks %}
+          <li class="list-group-item">
+            <strong>Título de la tarea:</strong> {{ task.task__title }} <br>
+            <strong>Veces que la tarea es compartida:</strong> {{ task.count }}
+          </li>
         {% endfor %}
       </ul>
     {% else %}

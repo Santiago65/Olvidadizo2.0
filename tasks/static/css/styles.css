@@ -1,0 +1,16 @@
+body {
+    background-color: #ADD8E6;
+  }
+
+  .navbar-silver .navbar-nav .nav-link {
+    color: rgb(212, 212, 212);
+  }
+  
+  .navbar-silver .navbar-nav .nav-link:hover {
+    color: #fff; /* Cambiar el color a un blanco claro */
+  }
+  
+  input#id_important {
+    border-color: #000;
+  }
+  

@@ -7,6 +7,8 @@ from .forms import TaskForm, CumpleForm
 from .models import Task, Cumple, SharedTask
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
+from django.db.models import Count
+from .models import SharedTask
 
 
 def home(request):
@@ -173,9 +175,8 @@ def admin_view(request):
     else:
         return redirect('home')
     
+
 @login_required
 def shared_tasks(request):
-    shared_tasks = SharedTask.objects.filter(users=request.user).values_list('task', flat=True)
-    pending_tasks = Task.objects.filter(pk__in=shared_tasks, datecompleted__isnull=True).distinct()
-    return render(request, 'shared_tasks.html', {'pending_tasks': pending_tasks})
-
+    shared_tasks = SharedTask.objects.filter(users=request.user).values('task__title').annotate(count=Count('task')).order_by('task__title')
+    return render(request, 'shared_tasks.html', {'shared_tasks': shared_tasks})
