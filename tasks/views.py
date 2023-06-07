@@ -7,7 +7,6 @@ from .forms import TaskForm, CumpleForm
 from .models import Task, Cumple, SharedTask
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
-from django.db.models import Count
 from .models import SharedTask
 
 
