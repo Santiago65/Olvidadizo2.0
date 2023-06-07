@@ -12,7 +12,7 @@
     {{form.as_p}}
 
     <button class="btn btn-primary">
-        Update
+        Actualizar
     </button>
 
 
@@ -26,14 +26,14 @@
     <form action="{% url 'complete_task' task.id %}" method="POST">
         {% csrf_token %}
         <button class="btn btn-secondary">
-            Complete
+            Completar
         </button>
     </form>
     
     <form action="{% url 'delete_task' task.id %}" method="POST" class="d-inline" onsubmit="return confirm('¿Estás seguro/a de borrar esta tarea?');">
         {% csrf_token %}
         <button class="btn btn-danger"> 
-            Delete
+            Borrar
         </button>
     </form>
 </div>

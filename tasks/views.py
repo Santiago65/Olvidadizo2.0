@@ -178,5 +178,23 @@ def admin_view(request):
 
 @login_required
 def shared_tasks(request):
-    shared_tasks = SharedTask.objects.filter(users=request.user).values('task__title').annotate(count=Count('task')).order_by('task__title')
-    return render(request, 'shared_tasks.html', {'shared_tasks': shared_tasks})
+    shared_tasks = SharedTask.objects.filter(users=request.user)
+    tasks = Task.objects.filter(users=request.user)  # Obtener las tareas del usuario actual
+    users = User.objects.exclude(pk=request.user.pk)  # Obtener todos los usuarios excepto el actual
+    return render(request, 'compartir_tarea.html', {'shared_tasks': shared_tasks, 'tasks': tasks, 'users': users})
+
+
+@login_required
+def compartir_tarea(request):
+    if request.method == 'POST':
+        task_id = request.POST['task']
+        user_ids = request.POST.getlist('users')
+        task = get_object_or_404(Task, pk=task_id, users=request.user)
+        shared_task = SharedTask.objects.create(task=task)
+        shared_task.users.set(user_ids)
+        return redirect('shared_tasks')
+    else:
+        tasks = Task.objects.filter(users=request.user)
+        users = User.objects.exclude(pk=request.user.pk)
+        return render(request, 'compartir_tarea_form.html', {'tasks': tasks, 'users': users})
+
