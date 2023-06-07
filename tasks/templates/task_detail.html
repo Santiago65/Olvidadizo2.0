@@ -30,9 +30,9 @@
         </button>
     </form>
     
-    <form action="{% url 'delete_task' task.id %}" method="POST">
+    <form action="{% url 'delete_task' task.id %}" method="POST" class="d-inline" onsubmit="return confirm('¿Estás seguro/a de borrar esta tarea?');">
         {% csrf_token %}
-        <button class="btn btn-danger">
+        <button class="btn btn-danger"> 
             Delete
         </button>
     </form>
