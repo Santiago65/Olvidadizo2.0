@@ -7,7 +7,7 @@
       {% csrf_token %}
       <div class="form-group">
         <label for="task">Seleccione una tarea:</label>
-        <select name="task" id="task" class="form-control">
+        <select name="task" id="task" class="form-control" multiple>
           {% for task in tasks %}
             <option value="{{ task.id }}">{{ task.title }}</option>
           {% endfor %}
