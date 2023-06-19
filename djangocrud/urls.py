@@ -38,6 +38,8 @@ urlpatterns = [
     path('shared-tasks/', views.shared_tasks, name='shared_tasks'),
     path('compartir-tarea/', views.shared_tasks, name='shared_tasks'),
     path('compartir-tarea/form/', views.compartir_tarea, name='compartir_tarea'),
+    path('admin-view/delete-user/<int:user_id>/', views.delete_user, name='delete_user'),
+    
 ]
 
 

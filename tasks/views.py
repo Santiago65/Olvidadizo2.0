@@ -197,3 +197,10 @@ def compartir_tarea(request):
         users = User.objects.exclude(pk=request.user.pk)
         return render(request, 'compartir_tarea_form.html', {'tasks': tasks, 'users': users})
 
+@login_required
+def delete_user(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    if request.method == 'POST':
+        user.delete()
+        return redirect('admin_view')
+    return redirect('home')
